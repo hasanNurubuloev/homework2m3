@@ -1,4 +1,6 @@
 package com.company;
+
+
 /*
 Написать класс проверяемого исключения LimitException, с конструктором LimitException(String message, double remainingAmount) и методом getRemainingAmount().
 Написать класс BankAccount с 1 полем double amount - остаток на счете и методами getAmount() - возвращает текущий остаток на счете, deposit(double sum) - положить деньги на счет, withDraw(sum) - снимает указанную сумму со счета.
@@ -11,13 +13,32 @@ public class Main {
 
     public static void main(String[] args) throws LimitException {
 
-        BankAccount bankAccount = new BankAccount() ;
+        BankAccount bankAccount = new BankAccount();
         bankAccount.deposit(10000);
+        while (true) {
+
+            bankAccount.setAmmount(bankAccount.getAmmount() - bankAccount.getSum());
+
+            try {
+                bankAccount.withDraw(6000);
 
 
-         while (true) {
-             bankAccount.withDraw(6000);
+            } catch (LimitException le) {
+
+                System.out.println(" Ваш баланс  - " + bankAccount.getAmmount());
+                if (bankAccount.getSum() > bankAccount.getAmmount()) {
+
+                    bankAccount.setAmmount(bankAccount.getAmmount() - bankAccount.getSum());
+                }
+            }
+
 
         }
+
     }
 }
+
+
+
+
+

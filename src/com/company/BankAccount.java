@@ -1,12 +1,24 @@
 package com.company;
 
-import javax.swing.plaf.synth.SynthOptionPaneUI;
 
 public class BankAccount {
     private double ammount;
+    private double sum;
+
+    public double getSum() {
+        return sum;
+    }
+
+    public void setSum(double sum) {
+        this.sum = sum;
+    }
 
     public double getAmmount() {
         return ammount;
+    }
+
+    public void setAmmount(double ammount) {
+        this.ammount = ammount;
     }
 
     public double deposit(double sum) {
@@ -14,24 +26,11 @@ public class BankAccount {
         System.out.println("Ваш баланс " + ammount);
         return ammount;
     }
-
-
-    public double withDraw(double sum) {
+    public double withDraw(double sum) throws LimitException {
         if (sum > ammount) {
-            try {
-                throw new LimitException("На вашем балансе не достаточно средств. Ваш баланс - ", ammount);
 
-            } catch (LimitException a) {
-
-                System.out.println( a.getMessage() + " Ваш баланс  - " + ammount);
-                sum = ammount;
-                ammount = ammount - sum;
-            }
-        } else {
-            ammount = ammount - sum;
+            throw new LimitException("На вашем балансе не достаточно средств. Ваш баланс - ", ammount);
         }
-
-
         return ammount;
     }
 }
